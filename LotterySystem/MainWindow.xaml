@@ -1,0 +1,111 @@
+﻿<Window x:Class="LotterySystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LotterySystem"
+        mc:Ignorable="d"
+        Title="抽奖" Height="700" Width="1200" >
+    
+    <Window.Resources>
+        <Style x:Key="MainButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- 悬停效果 -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF66BB6A"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF388E3C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FFFFFF" Offset="0"/>
+            <GradientStop Color="#FFFFFF" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    
+    <Grid>
+        <!-- 背景粒子 -->
+        
+        <!-- 定义三列布局 -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <!-- 左侧奖品 -->
+            <ColumnDefinition Width="257*"/>
+            <ColumnDefinition Width="93*"/>
+            <!-- 中间抽奖区域 -->
+            <ColumnDefinition Width="250"/>
+            <!-- 右侧空白，保证中间居中 -->
+        </Grid.ColumnDefinitions>
+
+        
+        
+        <!-- 左侧奖品栏 -->
+        <StackPanel Grid.Column="0" Margin="10,10,10,10" x:Name="PrizeContainer">
+            <TextBlock Text="奖品列表" FontSize="24" Foreground="Black" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- 中间抽奖区域 -->
+        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <Canvas x:Name="BgCanvas" Panel.ZIndex="0" Background="White"/>
+            <!-- 圆柱容器 -->
+            <Canvas x:Name="CylinderCanvas" Width="800" Height="400"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!-- 抽奖按钮 -->
+            <Button x:Name="btnStart"
+                    Content="开始抽奖"
+                    Width="200" Height="60"
+                    Style="{StaticResource MainButtonStyle}"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0,562,0,0"
+                    Click="StartDraw_Click"/>
+        </Grid>
+
+        <!-- 左下角操作按钮 -->
+        <StackPanel Grid.Column="0"
+                    Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,10">
+            <Button x:Name="btnEdit" Content="编辑奖项" Width="100" Margin="0,0,0,15" Style="{StaticResource MainButtonStyle}" Click="EditPrize_Click"/>
+            <Button x:Name="btnExcel" Content="导入参与人员(EXCEL)" Width="200" Margin="0,0,0,0" Style="{StaticResource MainButtonStyle}" Click="ImportExcel_Click"/>
+        </StackPanel>
+
+        <Grid/>
+        <Button x:Name="btnTheme"
+                Content="主题"
+                Width="50"
+                Height="50"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Style="{StaticResource MainButtonStyle}"
+                Margin="0,59,10,0"
+                Click="ToggleTheme_Click" Grid.Column="3" RenderTransformOrigin="-0.2,0.459"/>
+        
+    </Grid>
+</Window>

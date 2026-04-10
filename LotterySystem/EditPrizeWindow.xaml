@@ -1,0 +1,40 @@
+﻿<Window x:Class="LotterySystem.EditPrizeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="编辑奖项" Height="400" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <StackPanel Margin="10">
+
+        <TextBlock Text="奖项列表：" FontWeight="Bold"/>
+        <ListBox x:Name="PrizeListBox" Height="200"
+                 SelectionChanged="PrizeListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="（" />
+                        <TextBlock Text="{Binding Count}" />
+                        <TextBlock Text="人）" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+            <TextBlock Text="名称：" VerticalAlignment="Center" Width="50"/>
+            <TextBox x:Name="NameTextBox" Width="150"/>
+            <TextBlock Text="人数：" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBox x:Name="CountTextBox" Width="50"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+            <Button Content="添加奖项" Width="100" Margin="0,0,10,0" Click="AddPrize_Click"/>
+            <Button Content="更新奖项" Width="100" Margin="0,0,10,0" Click="UpdatePrize_Click"/>
+            <Button Content="删除奖项" Width="100" Click="DeletePrize_Click"/>
+        </StackPanel>
+
+        <Button Content="确定" Height="30" Margin="0,20,0,0" Click="OK_Click"/>
+
+    </StackPanel>
+</Window>
